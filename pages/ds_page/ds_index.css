@@ -1,137 +1,154 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
+/* 基础重置 */
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
 body{
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-image: url('../../dict/images/ds_cover.jpg');
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    /* flex-direction: column; */
-  }
-
-  .left_container {
-    width: 200px;
-    height: 500px;
-    background-color: rgba(51, 51, 51, 0.8); /* Background color with 80% opacity */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    border-radius: 10px; /* Adding border-radius for rounded corners */
-    /* margin-left: 20px; */
-    margin-right:50px;
-    margin-left: 20px;
+  min-height:100vh;
+  min-width:100vw;
+  display:flex;
+  justify-content:center;
+  align-items:flex-start;
+  gap:24px;
+  padding:24px;
+  background-image:url('../../dict/images/ds_cover.jpg');
+  background-position:center;
+  background-size:cover;
+  background-repeat:no-repeat;
 }
 
-.btn {
-    padding: 20px;
-    margin: 5px;
-    color: #fff;
-    text-align: center;
-    cursor: pointer;
-    transition: background-color 0.3s ease; /* Adding a smooth transition effect on hover */
+/* 左侧：按钮栏（桌面两栏固定宽度） */
+.left_container{
+  width:200px;
+  min-height:500px;
+  background-color:rgba(51,51,51,0.8);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  border-radius:10px;
+  margin:0 50px 0 20px;
 }
 
-/* Hover effect on buttons */
-.btn:hover {
-    background-color: #555; /* Change the background color on hover */
+.btn{
+  padding:20px;
+  margin:5px;
+  color:#fff;
+  text-align:center;
+  cursor:pointer;
+  transition:background-color .3s ease;
 }
+.btn:hover{ background-color:#555; }
 
+/* 右侧：内容容器（桌面保持卡片感） */
 .right_container{
-    position: relative;
-    width: 70%;
-    height: 750px;
-    background-color: rgba(51, 51, 51, 0.8);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-    margin: 20px 20px 50px 20px;
+  position:relative;
+  width:70%;
+  min-height:750px;
+  background-color:rgba(51,51,51,0.8);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:flex-start;
+  padding:20px;
+  margin:20px 20px 50px 20px;
+  border-radius:10px;
 }
 
+/* 各面板作为“选项卡”叠放（桌面） */
 .right_present_professional,
 .right_present_research,
 .right_present_inschool,
 .right_present_kaggle,
-.right_present_staff {
-    position: absolute;
-    top: 30px;
-    left: 50px;
-    right: 50px;
-    bottom: 50px;
-    padding: 20px; /* Add padding for spacing */
-    display: none;
-    box-sizing: border-box; /* Include padding in the total width */
-    max-height: 800px;
-    overflow-y: auto; 
+.right_present_staff{
+  position:absolute;
+  top:30px; left:50px; right:50px; bottom:50px;
+  padding:20px;
+  display:none;
+  max-height:800px;
+  overflow:auto;
+  -webkit-overflow-scrolling:touch;
+  background:transparent;
 }
 
+/* 激活显示 —— 别漏了 professional 和 kaggle */
 .right_present_professional.active,
 .right_present_research.active,
 .right_present_inschool.active,
-.right_present_staff.active {
-    display: block;
+.right_present_kaggle.active,
+.right_present_staff.active{
+  display:block;
 }
 
-.card {
-    position: relative;
-    color: #fff;
-    /* justify-content: center; */
+.card{ color:#fff; }
+.card h1{ font-size:32px; font-weight:400; margin-top:10px; }
+.card h2{ font-size:20px; font-weight:200; margin-bottom:20px; }
+.card p { font-size:18px; font-weight:200; margin-bottom:25px; }
+
+/* 图片自适应，不溢出 */
+.stacking_img{ text-align:center; }
+.stacking_img img{
+  max-width:100%;
+  height:auto;
+  display:block;
+  margin:0 auto;
 }
 
-.card h1{
-    font-size: 32px;
-    font-weight: 400;
-    margin-top: 10px;
+.return{
+  position:relative;
+  display:flex;
+  margin:850px 0 0 0; /* 桌面下留白；移动端会覆盖 */
 }
 
-.card h2{
-    font-size: 20px;
-    font-weight: 200;
-    margin-bottom: 20px;
+a:link, a:visited{ color:#fff; }
+
+/* ============== 移动端与小屏修复（≤ 992px） ============== */
+@media (max-width: 992px){
+  body{
+    flex-direction:column;
+    align-items:stretch;
+    gap:16px;
+    padding:16px;
+  }
+
+  /* 左侧按钮栏：改为一行多列、可换行 */
+  .left_container{
+    width:100%;
+    min-height:auto;
+    margin:0;
+    padding:12px;
+    flex-direction:row;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:8px;
+  }
+  .btn{ flex:1 1 140px; }
+
+  /* 右侧内容：全宽自适应，高度不固定 */
+  .right_container{
+    width:100%;
+    min-height:auto;
+    margin:0;
+    padding:16px;
+  }
+
+  /* 面板不再绝对定位，顺序排布，防止重叠挤压 */
+  .right_present_professional,
+  .right_present_research,
+  .right_present_inschool,
+  .right_present_kaggle,
+  .right_present_staff{
+    position:static;
+    top:auto; left:auto; right:auto; bottom:auto;
+    max-height:none;
+    overflow:visible;
+    padding:0;
+  }
+
+  /* 返回按钮的外边距缩小 */
+  .return{ margin:24px 0 0 0; justify-content:center; }
 }
 
-.card p{
-    font-size: 18px;
-    font-weight: 200;
-    margin-bottom: 25px;
-}
-
-.stacking_img {
-    position: relative;
-    text-align: center;
-}
-
-.stacking_img img {
-    top: 50%;
-    left: 50%;
-    width: 70%;
-    height: 70%;
-}
-
-.stacking_img p {
-    /* 用于占据空间，以避免文本与图片重叠 */
-    margin: 0;
-}
-
-.return {
-    position: relative;
-    display: flex;
-    margin: 850px 0 0 0;
-}
-
-a:link {
-    color: #fff;
-}
-
-a:visited{
-    color: #fff;
+/* ============== 超大屏微调（≥ 1440px） ============== */
+@media (min-width: 1440px){
+  body{ gap:40px; }
+  .right_container{ width:72%; }
 }
