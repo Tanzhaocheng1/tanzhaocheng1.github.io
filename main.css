@@ -1,136 +1,150 @@
-*{
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+/* ===== 基础重置 ===== */
+*{ margin:0; padding:0; box-sizing:border-box; }
 
+/* ===== 背景与主布局：桌面两栏，并排 ===== */
 body{
-  min-height: 100vh;
-  min-width: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-image: url('./dict/images/cover.jpg');
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
+  min-height:100vh;
+  min-width:100vw;                 /* 修复：不要用 100vh 当最小宽度 */
+  display:flex;                    /* 两栏：左文字 + 右卡片 */
+  justify-content:center;
+  align-items:flex-start;
+  gap:32px;                        /* 两栏间距 */
+  padding:24px;                    /* 边缘留白，避免贴边 */
+  background-image:url('./dict/images/cover.jpg');
+  background-position:center;
+  background-size:cover;
+  background-repeat:no-repeat;
 }
 
-.text-intro {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  margin-left: 20px;
-  margin-right: 20px;
-  
-  justify-content: center;
-  flex-wrap: wrap;
-  z-index: 1;
+/* ===== 左侧：文字区域 ===== */
+.text-intro{
+  position:relative;
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  justify-content:center;
+  flex:1 1 520px;                  /* 可收缩/可增长，基准宽度 */
+  max-width:800px;
+  z-index:1;
 }
 
+/* 文本（保留你原来的字号与风格，只做换行兜底） */
 .text-intro .intro h1{
-  text-align: justify;
-  font-size: 40px;
-  color: #fff;
-  font-weight: 300;
-  /* margin: 20px 20px 0 20px; */
+  text-align:justify;
+  font-size:40px;
+  color:#fff;
+  font-weight:300;
 }
-
 .text-intro .intro h2{
-  text-align: justify;
-  font-size: 28px;
-  color: #fff;
-  font-weight: 200;
-  margin-bottom: 30px;
-  /* margin: 20px 20px 0 20px; */
+  text-align:justify;
+  font-size:28px;
+  color:#fff;
+  font-weight:200;
+  margin-bottom:30px;
 }
-
 .text-intro .author h3{
-  text-align: justify;
-  font-size: 20px;
-  color: #fff;
-  font-weight: 100;
-  margin-bottom: 5px;
-  /* margin: 20px 20px 0 20px; */
+  text-align:justify;
+  font-size:20px;
+  color:#fff;
+  font-weight:100;
+  margin-bottom:5px;
 }
-
 .text-intro .author p{
-  text-align: justify;
-  font-size: 15px;
-  color: #fff;
-  font-weight: 100;
-  margin-bottom: 5px;
-  /* margin: 20px 20px 0 20px; */
+  text-align:justify;
+  font-size:15px;
+  color:#fff;
+  font-weight:100;
+  margin-bottom:5px;
+  overflow-wrap:anywhere;          /* 长链接/英文不把版面撑爆 */
 }
 
+/* ===== 右侧：卡片区域 ===== */
 .container{
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-  z-index: 1;
-  /* margin-top: 100px; */
+  position:relative;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:16px;
+  flex:1 1 360px;
+  z-index:1;
 }
 
 .container .card{
-  position: relative;
-  width: 280px;
-  height: 400px;
-  background-color: rgba(255, 255,255,0.1);
-  margin: 30px;
-  border-radius: 15px;
-  box-shadow: 20px 20px 50px rgba(0, 0, 0, 0.5);
-  overflow: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-top: 1px solid rgba(255, 255, 255,0.5);
-  border-left: 1px solid rgba(255, 255, 255,0.5);
-  backdrop-filter: blur(5px);
+  position:relative;
+  width:280px;
+  height:400px;                    /* 桌面固定高度，形成整齐网格 */
+  background-color:rgba(255,255,255,0.1);
+  border-radius:15px;
+  margin:8px;
+  box-shadow:20px 20px 50px rgba(0,0,0,0.5);
+  overflow:hidden;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  border-top:1px solid rgba(255,255,255,0.5);
+  border-left:1px solid rgba(255,255,255,0.5);
+  backdrop-filter:blur(5px);
 }
 
 .container .card .content{
-  padding: 20px;
-  text-align: center;
+  padding:20px;
+  text-align:center;
 }
-
-/* .container .card .content .hov{
-  transform: translateY(100px);
-  opacity: 0;
-  transition: 0.5s;
-} */
-
-/* .container .card:hover .content .hov{
-  transform: translateY(0);
-  opacity: 1;
-} */
-
 .container .card .content h3{
-  font-size: 40px;
-  color: #fff;
-  margin-top: -20px;
+  font-size:40px;
+  color:#fff;
+  margin-top:-20px;
 }
-
 .container .card .content p{
-  text-align: justify;
-  font-size: 18px;
-  color: #fff;
-  font-weight: 300;
-  margin: 20px 20px 0 20px;
-}  
-
+  text-align:justify;
+  font-size:18px;
+  color:#fff;
+  font-weight:300;
+  margin:20px 20px 0 20px;
+}
 .container .card .content a{
-  position: relative;
-  display: inline-block;
-  padding: 8px 20px;
-  margin-top: 15px;
-  background-color: #fff;
-  color: #000;
-  text-decoration: none;
-  border-radius: 20px;
-  font-weight: 500;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  position:relative;
+  display:inline-block;
+  padding:8px 20px;
+  margin-top:15px;
+  background-color:#fff;
+  color:#000;
+  text-decoration:none;
+  border-radius:20px;
+  font-weight:500;
+  box-shadow:0 5px 15px rgba(0,0,0,0.2);
 }
 
+/* ====== 响应式：平板及以下（≤992px）—— 改为上下布局 ====== */
+@media (max-width: 992px){
+  body{
+    flex-direction:column;         /* 并排 → 纵向堆叠 */
+    align-items:stretch;           /* 占满宽度 */
+    gap:20px;
+  }
+  .text-intro{
+    max-width:none;
+    margin:0;
+  }
+  .container{
+    justify-content:center;
+  }
+}
+
+/* ====== 响应式：手机（≤600px）—— 字号与卡片更紧凑 ====== */
+@media (max-width: 600px){
+  .text-intro .intro h1{ font-size:28px; }
+  .text-intro .intro h2{ font-size:18px; margin-bottom:16px; }
+  .text-intro .author h3{ font-size:16px; margin-bottom:4px; }
+  .text-intro .author p { font-size:14px; margin-bottom:4px; }
+
+  .container .card{
+    width:100%;
+    max-width:360px;               /* 适配多数手机宽度 */
+    height:auto;                   /* 取消固定高度，避免内容挤压 */
+    margin:12px auto;
+  }
+  .container .card .content h3{ font-size:28px; }
+  .container .card .content p { font-size:16px; margin:12px 0 0 0; }
+}
