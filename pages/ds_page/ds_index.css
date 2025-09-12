@@ -4,9 +4,9 @@
 body{
   min-height:100vh;
   min-width:100vw;
-  display:flex;                  /* 始终左右两栏 —— 不在手机改纵向 */
+  display:flex;                  /* 左右两栏 */
   justify-content:center;
-  align-items:flex-start;
+  align-items:center;            /* 垂直居中 —— 所有尺寸通用 */
   gap:20px;
   padding:16px;
   background-image:url('../../dict/images/ds_cover.jpg');
@@ -15,7 +15,7 @@ body{
   background-repeat:no-repeat;
 }
 
-/* 左侧菜单：桌面固定宽 */
+/* 左侧菜单 */
 .left_container{
   width:200px;
   min-height:500px;
@@ -38,10 +38,10 @@ body{
 }
 .btn:hover{ background-color:#555; }
 
-/* 右侧容器：保持卡片风格与绝对定位面板 */
+/* 右侧容器 */
 .right_container{
   position:relative;
-  width:70%;                     /* 两栏布局核心：右侧占比 */
+  width:70%;
   min-height:720px;
   background-color:rgba(51,51,51,0.8);
   display:flex;
@@ -49,25 +49,24 @@ body{
   align-items:center;
   justify-content:flex-start;
   padding:20px;
-  margin:12px;
+  padding-bottom:88px;           /* 给 Return 预留空间 */
   border-radius:10px;
 }
 
-/* 各内容面板：叠放（选项卡） */
+/* 内容面板 */
 .right_present_professional,
 .right_present_research,
 .right_present_inschool,
 .right_present_kaggle,
 .right_present_staff{
   position:absolute;
-  top:24px; left:24px; right:24px; bottom:24px; /* 四周留白，避免贴边 */
+  top:24px; left:24px; right:24px; bottom:88px;
   padding:8px;
   display:none;
   overflow:auto;
   -webkit-overflow-scrolling:touch;
 }
 
-/* 激活显示（包含 professional 与 kaggle） */
 .right_present_professional.active,
 .right_present_research.active,
 .right_present_inschool.active,
@@ -76,13 +75,13 @@ body{
   display:block;
 }
 
-/* 文案（桌面基准尺寸，移动端会缩放） */
+/* 文本 */
 .card{ color:#fff; }
 .card h1{ font-size:32px; font-weight:400; margin:8px 0 6px; line-height:1.25; }
-.card h2{ font-size:20px; font-weight:200; margin:0 0 14px; line-height:1.25; }
+.card h2{ font-size:20px; font-weight:200; margin:0 0 14px; line-height:1.25; display:flex; justify-content:space-between; gap:8px; }
 .card p { font-size:18px; font-weight:200; margin:0 0 18px; line-height:1.7; overflow-wrap:anywhere; }
 
-/* 图片自适应，绝不溢出 */
+/* 图片自适应 */
 .stacking_img{ text-align:center; }
 .stacking_img img{
   max-width:100%;
@@ -91,77 +90,67 @@ body{
   margin:0 auto;
 }
 
+/* Return 固定在容器底部居中 */
 .return{
-  position:relative;
-  display:flex;
-  margin:28px 0 0 0;             /* 右侧容器内部的返回区 */
+  position:absolute;
+  left:50%;
+  bottom:16px;
+  transform:translateX(-50%);
+  margin:0;
+  z-index:2;
 }
 
-/* 链接颜色 */
 a:link, a:visited{ color:#fff; }
 
-/* ===================== 小屏优化（<= 600px）—— 保持左右两栏，仅缩放 ===================== */
+/* ============ 小屏优化 ============ */
 @media (max-width: 600px){
-  /* 左栏更窄，按钮更紧凑 */
+  /* 左侧缩小，按钮紧凑 */
   .left_container{
     width:120px;
-    min-height:420px;
-    margin:0 8px 0 8px;
+    min-height:400px;
+    margin:0 8px;
     padding:8px;
   }
-  .btn{ padding:12px; margin:4px; }
+  .btn{ padding:10px; margin:4px; }
   .btn h3{ font-size:12px; line-height:1.2; }
 
-  /* 右栏占据剩余空间；仍为同一行的两栏布局 */
+  /* 右侧占满剩余空间 */
   .right_container{
-    width:calc(100% - 140px);     /* 100% - 左栏宽度(120) - 左右间距 */
-    min-height:calc(100vh - 32px);
+    width:calc(100% - 140px);
+    min-height:calc(100vh - 40px);
     padding:12px;
-    margin:8px;
+    padding-bottom:84px;
   }
 
-  /* 右侧面板仍为绝对定位，但边距更小；提升可视空间 */
+  /* 面板边距缩小 */
   .right_present_professional,
   .right_present_research,
   .right_present_inschool,
   .right_present_kaggle,
   .right_present_staff{
-    top:12px; left:12px; right:12px; bottom:12px;
+    top:12px; left:12px; right:12px; bottom:84px;
     padding:6px;
   }
 
-  /* 文案使用 clamp 按屏幕宽度自适应，避免挤爆或太小 */
+  /* 字体缩放 */
   .card h1{ font-size:clamp(18px, 4.8vw, 26px); }
-  .card h2{ font-size:clamp(14px, 3.8vw, 20px); }
+  .card h2{ font-size:clamp(14px, 3.8vw, 20px); display:block; }
   .card p { font-size:clamp(13px, 3.4vw, 16px); line-height:1.6; }
-
-  /* 避免 h2 左右两段在窄屏挤作一行（HTML 内也有兜底） */
-  .card h2{ display:block; }
-
-  /* 返回区紧凑 */
-  .return{ margin:12px 0 0 0; justify-content:center; }
 }
 
-/* ===================== 中小屏（601~992px）—— 也保持两栏，但更舒展 ===================== */
+/* 中屏优化 */
 @media (min-width: 601px) and (max-width: 992px){
-  .left_container{
-    width:160px;
-    min-height:480px;
-    margin:0 12px 0 12px;
-  }
+  .left_container{ width:160px; min-height:480px; margin:0 12px; }
   .btn h3{ font-size:13px; }
 
-  .right_container{
-    width:calc(100% - 184px);
-    min-height:700px;
-  }
+  .right_container{ width:calc(100% - 184px); min-height:700px; }
 
   .card h1{ font-size:clamp(22px, 2.6vw, 30px); }
   .card h2{ font-size:clamp(16px, 2.2vw, 22px); }
   .card p { font-size:clamp(14px, 1.9vw, 18px); }
 }
 
-/* ===================== 超大屏微调（>= 1440px） ===================== */
+/* 大屏微调 */
 @media (min-width: 1440px){
   body{ gap:28px; }
   .right_container{ width:72%; }
