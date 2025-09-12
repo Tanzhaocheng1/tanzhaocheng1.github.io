@@ -1,121 +1,180 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
+/* 基础重置 */
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
 body{
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-image: url('../../dict/images/cover_ds.jpg');
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    /* flex-direction: column; */
-  }
-
-  .left_container {
-    width: 200px;
-    height: 350px;
-    background-color: rgba(51, 51, 51, 0.8); /* Background color with 80% opacity */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    border-radius: 10px; /* Adding border-radius for rounded corners */
-    /* margin-left: 20px; */
-    margin-right:50px;
-    margin-left: 20px;
+  min-height:100vh;
+  min-width:100vw;
+  display:flex;                     /* 始终左右两栏 */
+  justify-content:center;
+  align-items:center;               /* 全尺寸：整块垂直居中 */
+  gap:20px;
+  padding:16px;
+  background-image:url('../../dict/images/cover_ds.jpg');
+  background-position:center;
+  background-size:cover;
+  background-repeat:no-repeat;
 }
 
-.btn {
-    padding: 20px;
-    margin: 5px;
-    color: #fff;
-    text-align: center;
-    cursor: pointer;
-    transition: background-color 0.3s ease; /* Adding a smooth transition effect on hover */
+/* 左侧菜单 */
+.left_container{
+  width:200px;
+  height:350px;
+  background-color:rgba(51,51,51,0.8);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  border-radius:10px;
+  margin:0 50px 0 20px;
 }
 
-/* Hover effect on buttons */
-.btn:hover {
-    background-color: #555; /* Change the background color on hover */
+.btn{
+  padding:20px;
+  margin:5px;
+  color:#fff;
+  text-align:center;
+  cursor:pointer;
+  transition:background-color .3s ease;
 }
+.btn:hover{ background-color:#555; }
 
+/* 右侧容器（Return 在内部） */
 .right_container{
-    position: relative;
-    width: 70%;
-    height: 750px;
-    background-color: rgba(51, 51, 51, 0.8);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-    margin: 20px 20px 50px 20px;
+  position:relative;
+  width:70%;
+  min-height:750px;
+  background-color:rgba(51,51,51,0.8);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:flex-start;
+  padding:20px;
+  padding-bottom:88px;              /* 给 Return 留空间 */
+  margin:20px;
+  border-radius:10px;
 }
 
+/* 内容面板（选项卡叠放） */
 .right_present_professional,
 .right_present_research,
-.right_present_inschool {
-    position: absolute;
-    top: 30px;
-    left: 50px;
-    right: 50px;
-    bottom: 50px;
-    padding: 20px; /* Add padding for spacing */
-    display: none;
-    box-sizing: border-box; /* Include padding in the total width */
-    max-height: 800px;
-    overflow-y: auto; 
+.right_present_inschool{
+  position:absolute;
+  top:30px; left:50px; right:50px; bottom:88px;  /* 不遮住 Return */
+  padding:20px;
+  display:none;
+  overflow:auto;
+  -webkit-overflow-scrolling:touch;
+  box-sizing:border-box;
 }
 
+/* 激活显示 */
 .right_present_professional.active,
 .right_present_research.active,
-.right_present_inschool.active {
-    display: block;
+.right_present_inschool.active{ display:block; }
+
+/* 文案（桌面基准） */
+.card{ color:#fff; }
+.card h1{ font-size:32px; font-weight:400; margin-top:10px; line-height:1.25; }
+.card h2{ font-size:20px; font-weight:200; margin-bottom:20px; line-height:1.25; }
+.card p { font-size:18px; font-weight:200; margin-bottom:25px; line-height:1.7; overflow-wrap:anywhere; }
+
+/* Return 固定在容器底部居中 */
+.return{
+  position:absolute;
+  left:50%;
+  bottom:16px;
+  transform:translateX(-50%);
+  margin:0;
+  z-index:2;
 }
 
-.card {
-    color: #fff;
+/* 链接颜色 */
+a:link, a:visited{ color:#fff; }
+
+/* 可选视频容器 */
+.mall_video{ position:relative; margin-left:200px; margin-right:200px; }
+
+/* ================== 手机端（<=600px）：保持左右两栏 + 垂直居中 + 文字与间距缩放 ================== */
+@media (max-width: 600px){
+  body{
+    height:100vh;
+    align-items:center;
+    gap:14px;
+    padding:10px;
+  }
+
+  .left_container{
+    width:120px;
+    height:320px;
+    margin:0 8px 0 8px;
+    padding:8px;
+  }
+  .btn{ padding:10px; margin:4px; }
+  .btn h3{ font-size:12px; line-height:1.2; }
+
+  .right_container{
+    width:calc(100% - 140px);      /* 100% - 左栏(120) - 余量 */
+    min-height:calc(100vh - 40px);
+    margin:0;
+    padding:12px;
+    padding-bottom:84px;           /* Return 预留 */
+  }
+
+  .right_present_professional,
+  .right_present_research,
+  .right_present_inschool{
+    top:12px; left:12px; right:12px; bottom:84px;
+    padding:10px;
+  }
+
+  /* 文字排版修复：手机端不两端对齐，开启断词，避免“字距被拉大” */
+  .card p{
+    text-align:left !important;
+    text-justify:auto;
+    hyphens:auto; -webkit-hyphens:auto; -ms-hyphens:auto;
+    word-break:normal;
+    overflow-wrap:anywhere;
+    line-height:1.6;
+    letter-spacing:normal; word-spacing:normal;
+  }
+
+  .card h1{ font-size:clamp(18px, 4.8vw, 26px); }
+  .card h2{ font-size:clamp(14px, 3.8vw, 20px); }
+  .card p { font-size:clamp(13px, 3.4vw, 16px); }
+
+  /* h2 在窄屏可自然换行 */
+  .right_container h2{ display:block; }
 }
 
-.card h1{
-    font-size: 32px;
-    font-weight: 400;
-    margin-top: 10px;
+/* ================== 中小屏（601~992px）：仍保持两栏并居中，适度缩放 ================== */
+@media (min-width:601px) and (max-width:992px){
+  body{ align-items:center; }
+
+  .left_container{
+    width:160px;
+    height:340px;
+    margin:0 12px;
+  }
+
+  .right_container{
+    width:calc(100% - 184px);
+    min-height:700px;
+    padding-bottom:88px;
+  }
+
+  .right_present_professional,
+  .right_present_research,
+  .right_present_inschool{
+    bottom:88px;
+  }
+
+  .card h1{ font-size:clamp(22px, 2.6vw, 30px); }
+  .card h2{ font-size:clamp(16px, 2.2vw, 22px); }
+  .card p { font-size:clamp(14px, 1.9vw, 18px); }
 }
 
-.card h2{
-    font-size: 20px;
-    font-weight: 200;
-    margin-bottom: 20px;
-}
-
-.card p{
-    font-size: 18px;
-    font-weight: 200;
-    margin-bottom: 25px;
-}
-
-.return {
-    position: relative;
-    display: flex;
-    margin: 850px 0 0 0;
-}
-
-a:link {
-    color: #fff;
-}
-
-a:visited{
-    color: #fff;
-}
-
-.mall_video{
-    position: relative;
-    margin-left: 200px;
-    margin-right: 200px;
+/* ================== 超大屏微调 ================== */
+@media (min-width:1440px){
+  body{ gap:28px; }
+  .right_container{ width:72%; }
 }
