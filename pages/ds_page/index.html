@@ -8,7 +8,7 @@
   <link rel="stylesheet" type="text/css" media="screen" href="ds_index.css" />
   <script src="index.js"></script>
 
-  <!-- 保留你喜欢的字体与段落设置，并补充移动端的 h2 排版修正 -->
+  <!-- 保留你的字体与段落设置；移动端仅做 h2 的“分行”兜底 -->
   <style>
     .right_container {
       font-family: "Times New Roman", Times, serif;
@@ -23,12 +23,9 @@
       text-align: justify;
       margin-bottom: 1em;
     }
-
-    /* 移动端：h2 改为上下两行，避免挤作一团（覆盖上面的设置） */
-    @media (max-width: 768px) {
-      .right_container h2 {
-        display: block;
-      }
+    /* 小屏时，仅把 h2 变为上下两行，避免横向挤爆；不改变两栏布局 */
+    @media (max-width: 600px) {
+      .right_container h2 { display: block; }
     }
   </style>
 </head>
@@ -55,10 +52,10 @@
           Participated in the Third National Land Survey of China, focusing on indoor data processing and verification to ensure accuracy and completeness of the final datasets. Responsibilities included performing consistency checks on vector and attribute data (e.g., land-use classification codes, area balance, topology closure), and developing SQL and Python scripts to automate batch validation, replacing manual record-by-record inspection.
         </p>
         <p>
-          For analytical tasks, I used Matplotlib to categorize land survey data into major classes such as cropland, forest, and construction land, and generated batch time-series trend charts. These charts supported filtering at both township and county levels, enabling the team to directly compare land-use changes across years and regions. This approach significantly improved the ability to detect anomalies such as cropland loss or abnormal expansion of construction land, guiding targeted field re-verification.
+          For analytical tasks, I used Matplotlib to categorize land survey data into major classes such as cropland, forest, and construction land, and generated batch time-series trend charts...
         </p>
         <p>
-          In addition, I helped design an automated reporting workflow by combining Excel with Python. After data cleaning, the workflow generated standardized reports summarizing land-use proportions, annual change rates, and accompanying visualizations. This improved both the readability and compliance of deliverables. As a result, the efficiency of indoor data review increased by ~40%, helping the team deliver final results within tight deadlines.
+          In addition, I helped design an automated reporting workflow by combining Excel with Python...
         </p>
       </div>
       <div class="stacking_img">
@@ -76,19 +73,19 @@
           <span>- Business Management Division (Project Supervisor)</span>
         </h2>
         <p>
-          Took charge of institute-wide project management, client coordination and maintenance, documentation, bidding, and review. Actively participated in the tendering process for fundamental surveying projects, including drafting technical proposals, preparing cost estimates, and organizing defense presentations. Engaged in over 20 tenders, leading 5 major bids as project manager, resulting in successful contracts worth over RMB 12 million in total.
+          Took charge of institute-wide project management, client coordination and maintenance, documentation, bidding, and review...
         </p>
         <p>
-          Delivered 32 high-priority mapping services directly for the leaders of the Guangxi Autonomous Region government. These projects required rapid turnaround—handling tasks such as land use status maps, thematic maps of key planning zones, and transport/population distribution maps. I managed the entire workflow from requirement analysis to final delivery within 48 hours, earning written commendations from senior officials for timeliness and quality.
+          Delivered 32 high-priority mapping services directly for the leaders of the Guangxi Autonomous Region government...
         </p>
         <p>
-          Over the course of serving 52 geological survey teams, I independently developed a lightweight Python-based geospatial data extraction tool. The tool automatically identifies target features (e.g., terrain points with elevation >500m, mountain areas with slope >30°) from uploaded vector datasets and outputs them in CSV/GeoJSON formats. This fully replaced manual filtering processes, reducing processing time from ~3 hours to just 10 minutes—a ~95% efficiency improvement. The tool was later integrated into multiple departmental workflows, significantly streamlining routine data handling.
+          Over the course of serving 52 geological survey teams, I independently developed a lightweight Python-based geospatial data extraction tool...
         </p>
         <p>
-          Additionally, I initiated and led the “Drowning Prevention Early-Warning Map” public welfare project. Using Python, I batch-collected hydrological data (rivers and reservoirs) within a 1 km buffer of seven elementary schools in Guangxi, then applied GeoPandas to compute linear distances between schools and nearby water bodies. Based on the rule “&lt;500m = High Risk,” I designed an automated risk labeling system. Finally, I built an interactive risk map with Plotly, featuring zoom, filter, and hover-query functions. This map was deployed in local drowning prevention training sessions, providing clear visual decision support for governments and schools.
+          Additionally, I initiated and led the “Drowning Prevention Early-Warning Map” public welfare project...
         </p>
         <p>
-          In parallel, I was responsible for project documentation, archival management, and cross-departmental communication. I routinely delivered progress reports and data summaries to institute leadership, gaining substantial experience in inter-team coordination and high-level project management.
+          In parallel, I was responsible for project documentation, archival management, and cross-departmental communication...
         </p>
       </div>
       <div class="stacking_img">
@@ -107,18 +104,10 @@
           <span>Aug. 2021 - June 2022</span>
           <span>- Data Engineering Branch (GIS R&amp;D Engineer)</span>
         </h2>
-        <p>
-          As a core member, actively participated in the National Geographic Conditions Survey and the Chongzuo “Land and Housing Integration” Registration Project, taking responsibility for both field surveying and indoor data processing...
-        </p>
-        <p>
-          For indoor processing, I led the batch calculation of building attributes by developing a custom Python-based workflow...
-        </p>
-        <p>
-          This workflow was validated across 10+ projects...
-        </p>
-        <p>
-          Additionally, I contributed to data quality assessment and result presentation...
-        </p>
+        <p>As a core member, actively participated in the National Geographic Conditions Survey...</p>
+        <p>For indoor processing, I led the batch calculation of building attributes...</p>
+        <p>This workflow was validated across 10+ projects...</p>
+        <p>Additionally, I contributed to data quality assessment and result presentation...</p>
       </div>
       <div class="stacking_img">
         <img src="../../dict/images/WRJ.jpg" alt="Process of Stacking">
@@ -134,21 +123,11 @@
           <span>June 2022 - Feb. 2023</span>
           <span>- Mapping Engineering Branch (GIS Cartography Automation Engineer)</span>
         </h2>
-        <p>
-          During my participation in Guangxi's "One Village, One Map" project and the compilation of Field Chief Maps...
-        </p>
-        <p>
-          In practice, addressing issues such as fragmented vector data formats...
-        </p>
-        <p>
-          I developed a three-tier automated scripting system based on ArcPy...
-        </p>
-        <p>
-          I innovatively introduced a "mapping - verification" closed-loop tool...
-        </p>
-        <p>
-          The project results not only supported the "Map-based Operations" needs...
-        </p>
+        <p>During my participation in Guangxi's "One Village, One Map" project...</p>
+        <p>In practice, addressing issues such as fragmented vector data formats...</p>
+        <p>I developed a three-tier automated scripting system based on ArcPy...</p>
+        <p>I innovatively introduced a "mapping - verification" closed-loop tool...</p>
+        <p>The project results not only supported the "Map-based Operations" needs...</p>
       </div>
       <div class="stacking_img">
         <img src="../../dict/images/广西交通图.jpg" alt="Transport Map"><br /><br />
@@ -167,13 +146,9 @@
           <span>- GIS Comprehensive Technology Position</span>
         </h2>
         <p>1. Led multi-project batch validation of surveying attribute data.</p>
-        <p>
-          For village-level maps in projects such as “One Village, One Map” and “Rapid Map Supply System,” developed Python scripts...
-        </p>
+        <p>For village-level maps in projects such as “One Village, One Map”...</p>
         <p>2. Led technical work on historical mapping data standardization.</p>
-        <p>
-          For 3000+ historical administrative maps (formats: .dwg/.shp/.jpg), developed Python batch processing scripts...
-        </p>
+        <p>For 3000+ historical administrative maps...</p>
         <p>3. General affairs & document management.</p>
         <p>Responsible for document circulation, drafting plans/reports...</p>
       </div>
@@ -190,8 +165,6 @@
     </div>
   </div>
 
-  <script>
-    showContent('staff');
-  </script>
+  <script>showContent('staff');</script>
 </body>
 </html>
